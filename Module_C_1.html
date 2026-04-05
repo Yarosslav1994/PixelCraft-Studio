@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PixelCraft — Курси Unity 2D</title>
+<style>
+:root {
+  --bg: #0b0f1a;
+  --card-bg: rgba(255,255,255,0.03);
+  --neon1: #7df9ff;
+  --neon2: #ff6bcb;
+  --accent: linear-gradient(90deg,var(--neon1),var(--neon2));
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: #e6eef6;
+  overflow-x: hidden;
+}
+
+/* Header */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 60px;
+  right: 0;
+  background: rgba(11,15,26,0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  z-index: 20;
+  transition: left 0.3s ease-in-out;
+}
+.logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+  background: var(--accent);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #ffae00;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 3px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ffae00, #ff6a00);
+  box-shadow: 0 0 6px #ffae00, 0 0 10px #ff6a00;
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100vh;
+  background: #1a2238;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  transition: width 0.3s ease-in-out;
+  overflow-x: hidden;
+  z-index: 15;
+}
+.sidebar:hover {
+  width: 200px;
+}
+.sidebar a {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar img {
+  width: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.sidebar a:hover img {
+  transform: scale(1.2);
+}
+.tooltip {
+  display: none;
+  background-color: #2c3e50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.sidebar a:hover .tooltip {
+  display: inline-block;
+}
+
+/* Основна секція */
+.wrap {
+  margin-left: 60px;
+  padding-top: 120px;
+  transition: margin-left 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.sidebar:hover ~ .wrap {
+  margin-left: 200px;
+}
+
+/* Картки */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+/* --- Квестівський стиль назв карток (яскраве світіння) --- */
+.card-inner h3 {
+  color: #d4af37; /* золотавий відтінок */
+  text-shadow: 0 0 8px #ffd700, 0 0 15px #ffef8a; /* м’яке світіння */
+  font-family: 'Cinzel', serif; /* епічний шрифт */
+  letter-spacing: 1px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+/* Ефект при наведенні */
+.card-inner h3:hover {
+  color: #fff6a3;
+  text-shadow: 0 0 12px #ffe066, 0 0 20px #fff8c6;
+  transform: scale(1.05);
+}
+
+/* --- Оформлення самої картки --- */
+.card-inner {
+  background: rgba(25, 25, 25, 0.85); /* темний напівпрозорий фон */
+  border: 2px solid rgba(212, 175, 55, 0.6); /* золотавий контур */
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15), 0 0 40px rgba(255, 255, 150, 0.1);
+  padding: 20px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+/* Ефект при наведенні — картка світиться */
+.card-inner:hover {
+  transform: scale(1.03);
+  border-color: #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4), 0 0 60px rgba(255, 255, 180, 0.2);
+}
+
+/* Текст усередині картки */
+.card-inner p {
+  color: #f5f5f5;
+  line-height: 1.5;
+}
+.accent-dot {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--neon1);
+  box-shadow: 0 0 12px var(--neon1), 0 0 30px var(--neon2);
+}
+.card h3 {
+  margin: 0 0 8px 0;
+  color: #fff;
+}
+.card p, .card ul {
+  color: rgba(230,238,246,0.75);
+  font-size: 0.95rem;
+}
+.card ul {
+  margin-left: 16px;
+}
+
+/* Музика */
+#music-control {
+  position: fixed;
+  top: 80px;
+  right: 40px;
+  z-index: 1000;
+}
+#music-toggle {
+  background: linear-gradient(90deg, #7df9ff, #ff6bcb);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+#music-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* --- Забираємо підкреслення та синій колір із посилань --- */
+a {
+  text-decoration: none;        /* прибирає лінію під текстом */
+  color: inherit;               /* залишає колір тексту, як у картці */
+}
+
+a:hover {
+  text-decoration: none;        /* прибирає лінію навіть при наведенні */
+}
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+<!-- Header -->
+<nav class="navbar">
+  <a href="index.HTML"><div class="logo">PixelCraft</div></a>
+  <div class="nav-links">
+    
+    
+</nav>
+
+<!-- Музика -->
+
+<!-- Основний контент -->
+<!-- Основний контент -->
+<div class="wrap">
+  <style>
+    .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+}
+
+.card {
+  background: #1e1e1e;
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* робить зображення пропорційним і заповнює блок */
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+    h3 {
+      margin: 10px 0;
+    }
+  </style>
+<H3>Модуль 1: Вступ до Unity</H3>
+<p> У цьому модулі ви ознайомитесь з основними інструментами та можливостями Unity для створення 2D ігор:</p>
+  <section class="cards">
+    <a href="https://youtu.be/tE4438Ncs2M" class="card">
+      <div class="card-inner">
+        <div class="accent-dot"></div>
+        <h3>1. Встановлення та налаштування Visual Studio Code</h3>
+        <p>У цьому відео ми навчимось встановлювати та налаштовувати Visual Studio Code для зручної роботи з кодом.</p>
+        <img src="img/vsc.png" alt="">
+      </div>
+    </a>
+
+    
+      <a href="https://youtu.be/M5a0EKnI5bQ" class="card">
+        <div class="card-inner">
+          <div class="accent-dot"></div>
+          
+          <h3>2.Створюємо 2D гру в Unity за допомогою GPT чату</h3>
+          <p>У цьому відео ми навчимось створювати 2D гру в Unity, використовуючи допомогу GPT-чату для генерації коду та ідей.</p>
+          <img src="img/2d+gtp.png" alt="">
+        </div>
+      </a>
+
+      
+        <a href="https://youtu.be/8Rh0okYUvnc" class="card">
+          <div class="card-inner">
+            <div class="accent-dot"></div>
+            <h3>3.Змінні в С# (String, Int, Float, Boolean.)</h3>
+            <p>У цьому відео ми навчимось працювати зі змінними в C#, зокрема типами String, Int, Float та Boolean.</p>
+            <img src="img/Variables.png" alt="">
+          </div>
+        </a>
+
+        <a href="https://youtu.be/vtPmOOCTOk8" class="card">
+          <div class="card-inner">
+            <div class="accent-dot"></div>
+            <h3>4.Арифметика в С# </h3>
+            <p>У цьому уроці ми навчимось виконувати базові арифметичні операції в C#:
+              додавання (+), віднімання (−), множення (*) та ділення (/) і використовувати їх у простих прикладах для Unity.</p>
+            <img src="img/Arifmetika.png" alt="">
+          </div>
+        </a>
+
+
+        <a href="https://youtu.be/w7MgrDUupx0" class="card">
+          <div class="card-inner">
+            <div class="accent-dot"></div>
+            <h3>5.Math у C#: (Pow, Sqrt, Min, Max) </h3>
+            <p>У цьому уроці ви навчитеся розуміти та використовувати основні методи Math у C#: для округлення чисел, знаходження мінімуму й максимуму, піднесення до степеня та роботи з коренями.</p>
+            <img src="img/math.png" alt="">
+          </div>
+        </a>
+
+        <a href="https://youtu.be/BzTbMHfkHOs" class="card">
+          <div class="card-inner">
+            <div class="accent-dot"></div>
+            <h3>6.IF / ELSE приймаємо рішення у коді </h3>
+            <p>У цьому уроці ви навчитеся розуміти та використовувати умовний оператор if / else у C#: для перевірки умов, прийняття рішень у коді, вибору альтернативних дій та уникнення типових помилок.</p>
+            <img src="img/if.png" alt="">
+          </div>
+        </a>
+        
+          
+
+    
+
+
+<script>
+const btn = document.getElementById('music-toggle');
+const music = document.getElementById('bg-music');
+let playing = false;
+btn.addEventListener('click', () => {
+  if (playing) {
+    music.pause();
+    btn.textContent = '🔈 Увімкнути музику';
+  } else {
+    music.play();
+    btn.textContent = '🔊 Вимкнути музику';
+  }
+  playing = !playing;
+});
+</script>
+
+
+
+<audio id="hoverSound" src="Music/new-notification-014-363678.mp3" preload="auto"></audio>
+
+<script>
+  // Знаходимо всі картки
+  const cards = document.querySelectorAll('.card-inner');
+  const sound = document.getElementById('hoverSound');
+
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      sound.currentTime = 0; // почати спочатку
+      sound.play();
+    });
+  });
+</script>
+
+</body>
+</html>
