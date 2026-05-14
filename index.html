@@ -848,7 +848,315 @@ link.addEventListener('click', function(e) {
         </div>
       </section>
     </main>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pixel Craft Studio</title>
 
+<style>
+:root{
+  --bg:#0b0f1a;
+  --neon1:#7df9ff;
+  --neon2:#ff6bcb;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:white;
+}
+
+/* ================= NAVBAR ================= */
+.navbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  background:rgba(11,15,26,0.8);
+  display:flex;
+  justify-content:space-between;
+  padding:14px 30px;
+  backdrop-filter:blur(8px);
+  z-index:100;
+}
+
+.navbar a{
+  color:white;
+  text-decoration:none;
+  margin-left:15px;
+}
+
+/* ================= WRAP ================= */
+.wrap{
+  padding:120px 20px 40px;
+  max-width:1200px;
+  margin:auto;
+}
+
+/* ================= HERO ================= */
+h1{
+  text-align:center;
+  font-size:2rem;
+}
+
+.lead{
+  text-align:center;
+  opacity:0.7;
+}
+
+/* ================= BUTTON ================= */
+.neon-btn{
+  display:block;
+  margin:20px auto;
+  padding:12px 20px;
+  border-radius:12px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* ================= SLIDER (простий) ================= */
+.slider{
+  margin-top:40px;
+  height:250px;
+  background:#111;
+  border-radius:12px;
+}
+
+/* ================= CARDS ================= */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-top:40px;
+}
+
+.card{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:12px;
+}
+
+/* ================= QA SECTION ================= */
+.qa-section{
+  margin-top:80px;
+  text-align:center;
+}
+
+.qa-title{
+  font-size:2rem;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.qa-subtitle{
+  opacity:0.7;
+  margin-bottom:30px;
+}
+
+.qa-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+.qa-card{
+  background:rgba(255,255,255,0.05);
+  padding:15px;
+  border-radius:12px;
+  text-align:left;
+  transition:0.3s;
+}
+
+.qa-card:hover{
+  transform:translateY(-5px);
+  border:1px solid var(--neon1);
+}
+
+.badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:4px 10px;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  color:black;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  margin-top:60px;
+  opacity:0.5;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+  <div><b>PixelCraft Studio</b></div>
+  <div>
+    <a href="#">Головна</a>
+    <a href="#">Про нас</a>
+    <a href="#">Контакти</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <h1>Silent: Shadow of Silence</h1>
+  <p class="lead">
+    Атмосферна 2D гра про виживання та таємниці.
+  </p>
+
+  <button class="neon-btn">Спробувати гру</button>
+
+  <!-- SLIDER PLACEHOLDER -->
+  <div class="slider"></div>
+
+  <!-- CARDS -->
+  <div class="cards">
+    <div class="card">Unity Game Dev</div>
+    <div class="card">AI Systems</div>
+    <div class="card">QA Testing</div>
+  </div>
+
+  <!-- ================= QA SECTION ================= -->
+  <section class="qa-section">
+
+    <h2 class="qa-title">🧪 QA Testers Hall of Fame</h2>
+    <p class="qa-subtitle">
+     Тестувальники, які брали участь у тестуванні гри
+    </p>
+
+    <div class="qa-grid">
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: QA Tester</p>
+        <p>Bugs: 12</p>
+        <div class="badge">Verified</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: QA Tester</p>
+        <p>Bugs: 8</p>
+        <div class="badge">Verified</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+<div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Ім'я Прізвище</h3>
+        <p>Role: Bug Reporter</p>
+        <p>Bugs: 15</p>
+        <div class="badge">Top Tester</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 PixelCraft Studio
+  </footer>
+
+</div>
+
+</body>
+</html>
     <footer>© 2025 — Твоє ім'я · Frontend demo</footer>
   </div>
 
@@ -1083,7 +1391,7 @@ prevBtn.addEventListener('click', () => {
   showSlide(current);
 });
 
-// автоматична прокрутка
+
 setInterval(() => {
   current = (current + 1) % total;
   showSlide(current);
